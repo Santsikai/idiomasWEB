@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AngularFireAuthGuard } from '@angular/fire/compat/auth-guard';
 
 const routes: Routes = [
   {
     path: 'idiomas',
     loadChildren: () => import('./pages/pages.module')
-      .then(m => m.PagesModule),
+      .then(m => m.PagesModule), canActivate: [AngularFireAuthGuard],
   },
   {
     path: '',

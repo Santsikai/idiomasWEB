@@ -1,0 +1,25 @@
+.sidebar {
+    position: relative;
+    width: 250px;
+    height: 100vh;
+  }
+  
+  .main-layout {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  ul li {
+    padding: 10px 40px;
+  }
+  
+  header {
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  header button {
+    margin-right: 20px;
+  }

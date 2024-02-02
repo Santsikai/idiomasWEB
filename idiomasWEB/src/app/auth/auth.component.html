@@ -1,9 +1,40 @@
+<!-- alerts -->
+<div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert" *ngIf="showAlertbbu">
+    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+    <div>
+      La cuenta ha sido bloqueda por el usuario, ¿desea desbloquearla? 
+    </div>
+    <button type="button" (click)="desblock()">Desbloquear</button>
+    <button type="button" class="btn-close" (click)="showAlertbbu=false" aria-label="Close"></button>
+  </div>
+  <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert" *ngIf="showAlertbba">
+    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+    <div>
+        La cuenta ha sido bloqueada por los administradores.
+    </div>
+    <button type="button" class="btn-close" (click)="showAlertbba=false" aria-label="Close"></button>
+  </div>
+  <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert" *ngIf="showAlertbbanoigualpass">
+    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+    <div>
+        Las contraseñas no coinciden.
+    </div>
+    <button type="button" class="btn-close" (click)="showAlertbba=false" aria-label="Close"></button>
+  </div>
 <!-- LOGIN -->
 <div id="login">
     <h1>LOGIN</h1>
+    <input type="text" placeholder="email" [(ngModel)]="email" />
+    <input type="text" placeholder="password" [(ngModel)]="password" />
+    <button (click)="login()">entrar</button>
 </div>
 <!-- REGISTER -->
 <div id="regis">
     <h1>SingIn</h1>
+    <input type="text" placeholder="email" [(ngModel)]="email" />
+    <input type="text" placeholder="username" [(ngModel)]="username" />
+    <input type="text" placeholder="password" [(ngModel)]="password" />
+    <input type="text" placeholder="confirmar password" [(ngModel)]="passwordc" />
+    <button (click)="register()">entrar</button>
 </div>
 <!-- FORGOT PASS -->

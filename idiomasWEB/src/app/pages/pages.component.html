@@ -1,2 +1,21 @@
-<p>pages works!</p>
-<router-outlet></router-outlet>
+<header> <button (click)="expanded = !expanded">
+    <span class="material-icons" *ngIf="!expanded">
+    menu
+    </span>
+    <span class="material-icons" *ngIf="expanded">
+        close
+    </span>
+</button> Header</header>
+
+<div class="main-layout">
+  <aside class="sidebar" *ngIf="expanded" @slidein>
+    <ul>
+      <li><a [routerLink]="['/idiomas/lista-lenguajes']">Listas Lenguajes</a></li>
+      <li><a [routerLink]="['/perfil']">Perfil</a></li>
+      <li><a >Cerrar Sesión</a></li>
+    </ul>
+  </aside>
+  <section>
+    <router-outlet></router-outlet>
+  </section>
+</div>
