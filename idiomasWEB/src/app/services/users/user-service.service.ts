@@ -48,7 +48,7 @@ export class UserService {
     return b.valueChanges();
    }
 
-   public getUserByUsernameandPass(email,pass){
+   public getUserByEmailandPass(email,pass){
     let b = this.dbf.collection<User>('/users',ref => ref.where("email","==",email).where("password","==",pass).limit(1));
      return b.valueChanges();
    }
@@ -125,7 +125,8 @@ export class UserService {
       username: username,
       password: pass,
       email: userAuth.user.email,
-      id: userAuth.user.uid
+      id: userAuth.user.uid,
+      role_id:rol
   }
   let u=new User();
   u.email=email;

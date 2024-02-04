@@ -21,6 +21,7 @@ export class AuthComponent implements OnInit{
   showAlertbbu=false;
   showAlertbba=false;
   showAlertbbanoigualpass=false;
+  EmailEnvio;
   ngOnInit() {
     this.getuserLogged();
   }
@@ -33,9 +34,10 @@ export class AuthComponent implements OnInit{
     }
   }
   async login(){
-    this.userSV.login(this.username,this.password)      
+    debugger;
+    this.userSV.login(this.email,this.password)      
     .then(async (res:any) => {
-    await this.userSV.getUserByUsernameandPass(this.username,this.password).subscribe((r:any)=>{
+    await this.userSV.getUserByEmailandPass(this.email,this.password).subscribe((r:any)=>{
       if(r[0].bloqued==0){
           localStorage.setItem("logUserID",JSON.stringify(res.user.uid));
           localStorage.setItem("isLoginRegister","true");
@@ -71,17 +73,23 @@ export class AuthComponent implements OnInit{
 
   register(){
     if(this.password==this.passwordc){
+      debugger;
       this.userSV.createUser(this.username,this.password,this.email,"2")      
       .then((res) => {
         localStorage.setItem("logUserID",JSON.stringify(res.id));
         localStorage.setItem("isLoginRegister","true");
         localStorage.setItem("rol_Id","2");
-        this.router.navigate(['/menu']);
+        this.router.navigate(['/idiomas']);
       }).catch((error) => {
         window.alert(error.message)
       })
     }else{
         window.alert("las constraseñas no coinciden")
       }
+  }
+
+  confirm() {
+    this.userSV.ForgotPassword(this.EmailEnvio);
+
   }
 }

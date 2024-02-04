@@ -21,20 +21,62 @@
     </div>
     <button type="button" class="btn-close" (click)="showAlertbba=false" aria-label="Close"></button>
   </div>
-<!-- LOGIN -->
-<div id="login">
-    <h1>LOGIN</h1>
-    <input type="text" placeholder="email" [(ngModel)]="email" />
-    <input type="text" placeholder="password" [(ngModel)]="password" />
-    <button (click)="login()">entrar</button>
-</div>
-<!-- REGISTER -->
-<div id="regis">
-    <h1>SingIn</h1>
-    <input type="text" placeholder="email" [(ngModel)]="email" />
-    <input type="text" placeholder="username" [(ngModel)]="username" />
-    <input type="text" placeholder="password" [(ngModel)]="password" />
-    <input type="text" placeholder="confirmar password" [(ngModel)]="passwordc" />
-    <button (click)="register()">entrar</button>
+
+<div class="section over-hide">
+  <div class="container">
+    <div class="row full-height justify-content-center">
+      <div class="col-12 text-center align-self-center py-5">
+        <div class="section text-center py-5 py-md-0">
+                <input class="pricing" type="checkbox" id="pricing" name="pricing"/>
+                <label for="pricing"><span class="block-diff">Login<span class="float-right">Registarse</span></span></label>
+          <div class="card-3d-wrap mx-auto">
+            <div class="card-3d-wrapper">
+              <div class="card-front">
+                <div class="pricing-wrap">
+                  <h4 class="mb-5">Iniciar Sesión</h4>
+                  <input class="mb-2" type="email" placeholder="email" [(ngModel)]="email" />
+                  <input class="mb-4" type="password" placeholder="password" [(ngModel)]="password" />
+                  <p class="mb-4"></p>
+
+                  <a (click)="login()" class="link mb-4">Entrar</a>
+                  <p class="mb-4"></p>
+                  <a href="#popup" class="mb-4 forgotpass">Contraseña Olvidada</a>
+                  <div class="img-wrap img-2">
+                    <img src="../../assets/login.jpg" alt="">
+                  </div>
+                    </div>
+                  </div>
+              <div class="card-back">
+                <div class="pricing-wrap">
+                  <h4 class="mb-5">Registarse</h4>
+                  <input class="mb-2 topinput" type="text" placeholder="email" [(ngModel)]="email" />
+                  <input class="mb-2" type="text" placeholder="username" [(ngModel)]="username" />
+                  <input class="mb-2" type="password" placeholder="password" [(ngModel)]="password" />
+                  <input class="mb-4" type="password" placeholder="confirmar password" [(ngModel)]="passwordc" />
+                  <p class="mb-1"></p>
+                  <a (click)="register()" class="link mb-4">Registrarse</a>
+                  <div class="img-wrap img-2">
+                    <img src="../../assets/register.jpg" alt="">
+                  </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
 </div>
 <!-- FORGOT PASS -->
+<div class="popup" id="popup">
+  <div class="popup__content">
+    <a href="#" class="close">✖</a>
+    <h1>Recuperar Contraseña</h1>
+    <p>Para recuperar la contraseña introcude el email con el cual hiciste el registro y se te enviara con correo,
+      si no recuerdas el email o no tienes acceso a el puede contactare con el servicio tecnico mediante este email [inserte email]
+      e intentaremos hacer todo lo posible para que recuperes la cuenta.</p>
+      <input type="email" placeholder="email" [(ngModel)]="EmailEnvio"/>
+      <p>Si no recibe este email, porfavor mire en la carpeta de span y si despues sigue sin el email, por favor contactenos.</p>
+      <a (click)="confirm()" href="#" class="accept">Recuperar Cuenta</a>
+  </div>
+</div>
