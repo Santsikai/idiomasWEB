@@ -28,18 +28,17 @@ export class AuthComponent implements OnInit{
   async getuserLogged(){
     let a=await this.userSV.getLoggedUser();
     if(a){
-      localStorage.setItem("logUserID",JSON.stringify(a.uid));
+      localStorage.setItem("logUserID",a.uid);
       localStorage.setItem("isLoginRegister","true");
           this.router.navigate(['/idiomas']);
     }
   }
   async login(){
-    debugger;
     this.userSV.login(this.email,this.password)      
     .then(async (res:any) => {
     await this.userSV.getUserByEmailandPass(this.email,this.password).subscribe((r:any)=>{
       if(r[0].bloqued==0){
-          localStorage.setItem("logUserID",JSON.stringify(res.user.uid));
+          localStorage.setItem("logUserID",res.user.uid);
           localStorage.setItem("isLoginRegister","true");
           localStorage.setItem("rol_Id",r[0].role_id);
           this.router.navigate(['/idiomas']);
@@ -64,7 +63,7 @@ export class AuthComponent implements OnInit{
   }
   desblock(){
     this.userSV.bloquearUser(this.iduserbloq,0);
-          localStorage.setItem("logUserID",JSON.stringify(this.iduserbloq));
+          localStorage.setItem("logUserID",this.iduserbloq);
           localStorage.setItem("isLoginRegister","true");
           localStorage.setItem("rol_Id",this.iduserrol);
           this.router.navigate(['/idiomas']);
@@ -73,10 +72,9 @@ export class AuthComponent implements OnInit{
 
   register(){
     if(this.password==this.passwordc){
-      debugger;
       this.userSV.createUser(this.username,this.password,this.email,"2")      
       .then((res) => {
-        localStorage.setItem("logUserID",JSON.stringify(res.id));
+        localStorage.setItem("logUserID",res.id);
         localStorage.setItem("isLoginRegister","true");
         localStorage.setItem("rol_Id","2");
         this.router.navigate(['/idiomas']);

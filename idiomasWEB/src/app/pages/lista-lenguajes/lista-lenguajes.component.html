@@ -1,1 +1,40 @@
-<p>lista-lenguajes works!</p>
+<div class="ag-format-container">
+    <div class="ag-courses_box">
+      <div class="ag-courses_item">
+        <a href="#popup" class="ag-courses-item_link">
+          <div class="ag-courses-item_bg"></div>
+  
+          <div class="ag-courses-item_title">
+            Añadir Lenguaje
+          </div>
+        </a>
+      </div>
+  
+      <div class="ag-courses_item" *ngFor="let idioma of listIdiomas">
+        <div class="ag-courses-item_link">
+            <a [routerLink]="['/idiomas/lenguaje',idioma.id]">
+                <div class="ag-courses-item_bg"></div>
+                <div class="ag-courses-item_title">
+                    {{idioma.nombre}}
+                </div>
+            </a>
+        </div>
+    </div>
+  
+      
+  
+    </div>
+  </div>
+
+  <div class="popup" id="popup">
+    <div class="popup__content">
+      <a href="#" class="close">✖</a>
+      <h1>Crear nuevo Lenguaje</h1>
+      <p>Para recuperar la contraseña introcude el email con el cual hiciste el registro y se te enviara con correo,
+        si no recuerdas el email o no tienes acceso a el puede contactare con el servicio tecnico mediante este email [inserte email]
+        e intentaremos hacer todo lo posible para que recuperes la cuenta.</p>
+        <input type="email" placeholder="email" [(ngModel)]="nombreLeng"/>
+        <p>Si no recibe este email, porfavor mire en la carpeta de span y si despues sigue sin el email, por favor contactenos.</p>
+        <a (click)="create()" href="#" class="accept">Recuperar Cuenta</a>
+    </div>
+  </div>

@@ -1,1 +1,29 @@
-<p>lenguaje works!</p>
+<h1>{{idioma.nombre}}</h1>
+<div class="ag-format-container">
+    <div class="ag-courses_box">
+      <div class="ag-courses_item">
+        <a href="#" class="ag-courses-item_link">
+          <div class="ag-courses-item_bg"></div>
+  
+          <div class="ag-courses-item_title">
+            Añadir Grupo de Vocabulario
+          </div>
+        </a>
+      </div>
+  
+      <div class="ag-courses_item" *ngFor="let gv of listgv">
+        <div class="ag-courses-item_link">
+            <a [routerLink]="['/idiomas/ejercicio',gv.id]">
+                <div class="ag-courses-item_bg"></div>
+                <div class="ag-courses-item_title">
+                    {{gv.nombre}}
+                </div>
+            </a>
+        </div>
+    </div>
+  
+      
+  
+    </div>
+  </div>
+  

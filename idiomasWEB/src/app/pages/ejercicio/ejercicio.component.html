@@ -1,1 +1,259 @@
-<p>ejercicio works!</p>
+
+<div id="container">
+  <div *ngIf="allpalabras">
+    <h1>Practicar idioma</h1>
+    <div id="titleseparator"></div>
+    <div *ngIf="showOpciones">
+      <ion-card (click)="showContents('estudiar')" class="opciones">
+        <ion-card-header>
+          <ion-card-title class="titleopciones">Estudiar</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+      <ion-card (click)="showContents('practicar')" class="opciones">
+        <ion-card-header>
+          <ion-card-title class="titleopciones">Practicar</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+    </div>
+    <div *ngIf="showEstudiar">
+      <button color="tertiary" expand="block" (click)="showContents('opciones')"
+        >Cambiar Seleccion</button
+      >
+      <div>
+        <ul id="tabla" class="dark">
+          <div class="row header">
+            <div class="col">columna 1</div>
+            <div class="col">columna 2</div>
+          </div>
+          <div class="row" *ngFor="let item of listPalabra">
+            <div class="col">{{ item.col1 }}</div>
+            <div class="col">{{ item.col2 }}</div>
+          </div>
+        </ul>
+      </div>
+    </div>
+    <div *ngIf="showPracticar" id="practicar">
+      <ion-button
+      color="tertiary"
+        expand="block"
+        (click)="showContents('opciones')"
+        id="cambiarselect"
+        >Cambiar Seleccion</ion-button
+      >
+      <div *ngIf="showTipoPractica">
+        <ion-card id="empezarCard" (click)="startEjercicio('mixed')">
+          <ion-card-header>
+            <ion-card-subtitle> </ion-card-subtitle>
+            <ion-card-title id="emepzarlabel">Empezar</ion-card-title>
+          </ion-card-header>
+          <ion-card-content> </ion-card-content>
+        </ion-card>
+      </div>
+      <div *ngIf="showEjercicio">
+        <div id="subtitle">
+          <div id="lineizq"></div>
+          <h2>{{ title }}</h2>
+          <div id="linedrch"></div>
+        </div>
+        <div id="restcontent">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title class="ejTitle">{{ wordShow }}</ion-card-title>
+              <ion-card-subtitle>
+                <div id="tablaEJ">
+                  <div class="rowEJ headerEJ">
+                    <div class="colEJ">
+                      palabras acertadas:<br />
+                      {{ totalwordsright }}/{{ totalwords }}
+                    </div>
+                    <div class="colEJ">
+                      palabras totales:<br />
+                      {{ wordsdone }}/{{ totalwords }}
+                    </div>
+                  </div>
+                </div>
+              </ion-card-subtitle>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-input
+                fill="outline"
+                shape="round"
+                [(ngModel)]="wordguessed"
+                *ngIf="!wordFailed"
+                class="wordGuessed"
+              ></ion-input>
+              <h3 *ngIf="wordFailed" [innerHTML]="wordtoguess"></h3>
+            </ion-card-content>
+          </ion-card>
+
+          <button color="tertiary" *ngIf="tries != 3" expand="block" (click)="checkAnswer()"
+            >Comprobar</button
+          >
+          <ion-button
+          color="tertiary"
+            *ngIf="tries == 3 && totalwords != wordsdone"
+            expand="block"
+            (click)="nextWord()"
+            >Siguiente palabra</ion-button
+          >
+          <ion-button
+          color="tertiary"
+            *ngIf="tries == 3 && totalwords == wordsdone"
+            expand="block"
+            (click)="nextWord()"
+            >Terminar practica</ion-button
+          >
+        </div>
+      </div>
+      <div *ngIf="finEjercicio">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title id="puntuacion">Puntuación</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            <h3>{{ totalwordsright }}/{{ totalwords }}</h3>
+          </ion-card-content>
+        </ion-card>
+        <ion-button color="tertiary" expand="block" (click)="showContents('estudiar')"
+          >Estudiar</ion-button
+        >
+        <ion-button color="tertiary" expand="block" (click)="showContents('reintentar')"
+          >Reintentar</ion-button
+        >
+        <ion-button
+        color="tertiary"
+          expand="block"
+          [routerLink]="['/pages/idioma', id]"
+          routerLinkActive="router-link-active"
+          replaceUrl="true"
+          >Cambiar grupo de palabras</ion-button
+        >
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!allpalabras">
+    <h1>{{ gv.nombre }}</h1>
+    <div id="titleseparator"></div>
+    <div *ngIf="showOpciones">
+        <div class="card" (click)="showContents('estudiar')">
+            <h4>Estudiar</h4>
+        </div>
+        
+          <div class="card" (click)="showContents('practicar')">
+            <h4>Practicar</h4>
+        </div>
+    </div>
+    <div *ngIf="showEstudiar">
+      <button color="tertiary" expand="block" (click)="showContents('opciones')"
+        >Cambiar Seleccion</button
+      >
+
+      <div>
+        <ul id="tabla" class="dark">
+          <div class="row header">
+            <div class="col">{{ gv.nombre_col1 }}</div>
+            <div class="col">{{ gv.nombre_col2 }}</div>
+          </div>
+          <div class="row" *ngFor="let item of listPalabra">
+            <div class="col">{{ item.col1 }}</div>
+            <div class="col">{{ item.col2 }}</div>
+          </div>
+        </ul>
+      </div>
+    </div>
+    <div *ngIf="showPracticar" id="practicar">
+      <button
+        (click)="showContents('opciones')"
+        id="cambiarselect"
+        >Cambiar Seleccion</button
+      >
+      <div *ngIf="showTipoPractica">
+        <h2>Seleccione tipo practica</h2>
+        <div class="card" (click)="startEjercicio('col1TOcol2')">
+            <h4>{{ gv.nombre_col1 }} => {{ gv.nombre_col2 }}</h4>
+        </div>
+        <div class="card" (click)="startEjercicio('col2TOcol21')">
+            <h4>{{ gv.nombre_col2 }} => {{ gv.nombre_col1 }}</h4>
+        </div>
+        <div class="card" (click)="startEjercicio('mixed')">
+            <h4>Mezcla</h4>
+        </div>
+
+
+      </div>
+      <div *ngIf="showEjercicio">
+        <div id="subtitle">
+          <div id="lineizq"></div>
+          <h2>{{ title }}</h2>
+          <div id="linedrch"></div>
+        </div>
+        <div id="restcontent">
+            <div class="card" (click)="startEjercicio('mixed')">
+                <h4>{{ wordShow }}</h4>
+                <div id="tablaEJ">
+                    <div class="rowEJ headerEJ">
+                      <div class="colEJ">
+                        palabras acertadas:<br />
+                        {{ totalwordsright }}/{{ totalwords }}
+                      </div>
+                      <div class="colEJ">
+                        palabras totales:<br />
+                        {{ wordsdone }}/{{ totalwords }}
+                      </div>
+                    </div>
+                  </div>
+                <input
+            [(ngModel)]="wordguessed"
+            *ngIf="!wordFailed"
+          >
+          <h3 *ngIf="wordFailed" [innerHTML]="wordtoguess"></h3>
+            </div>
+
+          <button color="tertiary" *ngIf="tries != 3" expand="block" (click)="checkAnswer()"
+            >Comprobar</button
+          >
+          <button
+          color="tertiary"
+            *ngIf="tries == 3 && totalwords != wordsdone"
+            expand="block"
+            (click)="nextWord()"
+            >Siguiente palabra</button
+          >
+          <button
+          color="tertiary"
+            *ngIf="tries == 3 && totalwords == wordsdone"
+            expand="block"
+            (click)="nextWord()"
+            >Terminar practica</button
+          >
+        </div>
+      </div>
+
+      <div *ngIf="finEjercicio">
+        <div class="card">
+            <h4>Puntuación</h4>
+            <h3>{{ totalwordsright }}/{{ totalwords }}</h3>
+        </div>
+        <button color="tertiary" expand="block" (click)="showContents('estudiar')"
+          >Estudiar</button
+        >
+        <button color="tertiary" expand="block" (click)="showContents('reintentar')"
+          >Reintentar</button
+        >
+        <button color="tertiary" expand="block" (click)="showContents('practicar')"
+          >Cambiar tipo ejercicio</button
+        >
+        <button
+        color="tertiary"
+          expand="block"
+          [routerLink]="['/pages/grupoVocabulario', gv.id]"
+          routerLinkActive="router-link-active"
+          replaceUrl="true"
+          >Cambiar grupo de palabras</button
+        >
+      </div>
+    </div>
+  </div>
+</div>
