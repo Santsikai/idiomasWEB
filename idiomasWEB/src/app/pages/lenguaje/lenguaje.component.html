@@ -2,7 +2,7 @@
 <div class="ag-format-container">
     <div class="ag-courses_box">
       <div class="ag-courses_item">
-        <a href="#" class="ag-courses-item_link">
+        <a (click)="showModal=true" class="ag-courses-item_link">
           <div class="ag-courses-item_bg"></div>
   
           <div class="ag-courses-item_title">
@@ -26,4 +26,14 @@
   
     </div>
   </div>
-  
+  <div class="popup" id="popup" *ngIf="showModal">
+    <div class="popup__content">
+      <a (click)="showModal=false" class="close">✖</a>
+      <h1>Crear nuevo Grupo de vocabulario</h1>
+        <input type="text" placeholder="Nombre" [(ngModel)]="nameNew"/>
+        <input type="text" placeholder="Nombre columna 1" [(ngModel)]="col1New"/>
+        <input type="text" placeholder="Nombre columna 2" [(ngModel)]="col2New"/>
+        <p></p>
+        <a (click)="create()" class="accept">Crear grupo vocabulario</a>
+    </div>
+  </div>

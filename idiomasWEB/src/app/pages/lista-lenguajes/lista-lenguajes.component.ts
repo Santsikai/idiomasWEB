@@ -11,6 +11,7 @@ export class ListaLenguajesComponent {
   userId;
   listIdiomas:Idioma[]=[];
   nombreLeng;
+  showModal=false;
   constructor(
     private idiomaSV:IdiomaService,
     private router:Router,
@@ -35,6 +36,7 @@ export class ListaLenguajesComponent {
 
     this.idiomaSV.createIdioma(this.userId,this.nombreLeng);
     this.nombreLeng="";
+    this.showModal=false
 }
 
 

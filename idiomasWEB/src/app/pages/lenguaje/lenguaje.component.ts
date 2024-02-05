@@ -12,6 +12,10 @@ export class LenguajeComponent implements OnInit{
   idioma:Idioma;
   listgv:GrupoVocabulario[]=[];
   id:any;
+  showModal=false;
+  nameNew;
+  col1New;
+  col2New;
   constructor(
     private ARoute:ActivatedRoute,
     private idiomaSV:IdiomaService,
@@ -23,12 +27,6 @@ export class LenguajeComponent implements OnInit{
     this.getListaGV();
     
   }
-  moveTo(id,total){
-    if(!total)
-    this.router.navigate(['/pages/grupoVocabulario',id]);
-  if(total)
-  this.router.navigate(['/pages/practicaIdioma',id]);
-  }
   async getIdioma(){
     this.idioma= await this.idiomaSV.getIdioma(this.id);
   }
@@ -39,4 +37,15 @@ export class LenguajeComponent implements OnInit{
       this.listgv=res;
     })
   }
+
+  create() {
+
+    this.gvSV.createGrupoVocabulario(this.id,this.nameNew,this.col1New,this.col2New);
+    this.nameNew="";
+ this.col1New="";
+ this.col2New="";
+  this.showModal=false;
+}
+
+
 }

@@ -192,7 +192,7 @@ a.accept {
     background-color: #ed6755;
     border: none;
     border-radius: 5px;
-    width: 90%;
+    width: 95%;
     align-items: center;
     padding: 14px;
     font-size: 16px;
@@ -210,15 +210,10 @@ a.accept {
   background-color: rgba(black, .8);
   backdrop-filter: blur(10px);
   z-index: 9999;
-  opacity: 0;
-  visibility: hidden;
   transition: all .3s;
 
   // The url changes when the anchor is triggered and CSS can watch that
-  &:target {
-    opacity: 1;
-    visibility: visible;
-  }
+ 
   
   &__content {
     @include absCenter; // Our mixin to center horizontally and vertically

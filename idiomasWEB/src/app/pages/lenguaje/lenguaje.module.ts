@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LenguajeComponent } from './lenguaje.component';
 import { LenguajeRoutingModule } from './lenguaje-routing.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -11,7 +12,8 @@ import { LenguajeRoutingModule } from './lenguaje-routing.module';
   ],
   imports: [
     CommonModule,
-    LenguajeRoutingModule
+    LenguajeRoutingModule,
+    FormsModule
   ]
 })
 export class LenguajeModule { }

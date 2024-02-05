@@ -19,7 +19,9 @@ export class EjercicioComponent {
   listPalabra:Palabra[]=[];
   id;
   items=[];
-  allpalabras=false;
+  showModal=false;
+  col1New;
+  col2New;
   constructor(
     private ARoute:ActivatedRoute,
     private router:Router,
@@ -29,30 +31,11 @@ export class EjercicioComponent {
 
   ngOnInit() {
     this.id = this.ARoute.snapshot.paramMap.get('gvid').replace(/%20/g, " ");
-    if(this.router.url.includes('/pages/practicaIdioma')){
-      this.allpalabras=true;
-      this.getlistAllPalabra();
-    }else{
-    this.allpalabras=false;
     
     this.getlistPalabra();
-    }
   }
   async getGV(){
     this.gv= await this.gvSV.getGrupoVocabulario(this.id);
-  }
-  getlistAllPalabra(){
-    this.gvSV.getListGrupoVocabulariobyIdiomaId(this.id).subscribe((r:any)=>{
-      for(let e of r){
-        this.palabraSV.getListPalabrabyGvId(e.id).subscribe((res:any)=>{
-          for(let p of res){
-            this.listPalabra.push(p)
-          }
-    })
-      }
-      
-    })
-    
   }
   getlistPalabra(){
     this.palabraSV.getListPalabrabyGvId(this.id).subscribe((res:any)=>{
@@ -228,4 +211,13 @@ export class EjercicioComponent {
     } 
     return array; 
   };
+
+  create() {
+
+    this.palabraSV.createPalabra(this.id,this.col1New,this.col2New);
+ this.col1New="";
+ this.col2New="";
+  this.showModal=false;
+}
+
 }
