@@ -10,6 +10,11 @@ const routes: Routes = [{
   component: PagesComponent,
   children: [
     {
+      path: 'busquedaLenguajes',
+      loadChildren: () => import('./busqueda-leng/busqueda-leng.module')
+        .then(m => m.BusquedaLengModule),
+    },
+    {
       path: 'lista-lenguajes',
       loadChildren: () => import('./lista-lenguajes/lista-lenguajes.module')
         .then(m => m.ListaLenguajesModule),

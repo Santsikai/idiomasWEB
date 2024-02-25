@@ -27,6 +27,8 @@ export class IdiomaService {
       id: apartado.id,
       user_id: apartado.user_id,
       nombre: apartado.nombre,
+      lenguaje: apartado.lenguaje,
+      private:apartado.private
     };
     return IdiomaRef.set(IdiomaData, {
       merge: true,
@@ -40,6 +42,8 @@ export class IdiomaService {
       a.id=arg.payload.data().id;
       a.nombre=arg.payload.data().nombre;
       a.user_id=arg.payload.data().user_id;
+      a.lenguaje=arg.payload.data().lenguaje;
+      a.private=arg.payload.data().private;
     });
     return a;
   }
@@ -49,9 +53,11 @@ export class IdiomaService {
     return b.valueChanges();
   }
 
-  public editIdioma(id:string, newname:string){
+  public editIdioma(id:string, newname:string,lenguaje:string, pribate:boolean){
     this.dbf.doc(`idioma/${id}`).set({
       nombre:newname,
+      lenguaje:lenguaje,
+      private:pribate
     },{merge:true});
     
   }
@@ -64,18 +70,65 @@ export class IdiomaService {
     af.delete();
   }
 
-  public createIdioma(user_id:string,nombre:string){
+  public createIdioma(user_id:string,nombre:string,lenguaje:string,pribate:boolean){
     let apartado=new Idioma();
     apartado.id=String(formatDate(Date.now(),'yyyy-MM-dd mm:ss',this.locale));
     apartado.nombre=nombre;
     apartado.user_id=user_id;
+    apartado.lenguaje=lenguaje;
+    apartado.private=pribate;
     this.SetIdiomaData(apartado);
     
   }
-  public createIdiomaWithID(id,user_id:string,nombre:string){
-    let apartado=new Idioma();
-    apartado.id=id;
-    apartado.nombre=nombre;
+
+  //getidiomasuser
+  SetIdiomaUserData(apartado) {
+    const IdiomaRef: AngularFirestoreDocument<any> = this.afStore.doc(
+      `idioma-user/${apartado.id}`
+    );
+    
+    const IdiomaData: IdiomaUser = {
+      id: apartado.id,
+      user_id: apartado.user_id,
+      idioma_id: apartado.idioma_id,
+    };
+    return IdiomaRef.set(IdiomaData, {
+      merge: true,
+    });
+  }
+
+  public async getIdiomaUser(id:string){
+    let a=new IdiomaUser();
+     let af= this.dbf.doc<IdiomaUser>(`idioma-user/${id}`);
+     af.snapshotChanges().subscribe(arg =>{ 
+      a.id=arg.payload.data().id;
+      a.idioma_id=arg.payload.data().idioma_id;
+      a.user_id=arg.payload.data().user_id;
+    });
+    return a;
+  }
+
+  public getListIdiomaUserByIdioma(id:string){
+   let b = this.dbf.collection<IdiomaUser>('/idioma-user',ref => ref.where("idioma_id","==",id));
+    return b.valueChanges();
+  }
+  public getListIdiomaUserByUser(id:string){
+    let b = this.dbf.collection<IdiomaUser>('/idioma-user',ref => ref.where("user_id","==",id));
+     return b.valueChanges();
+   }
+   public getListIdiomaUserByIdiomaandUser(id:string,user:string){
+    let b = this.dbf.collection<IdiomaUser>('/idioma-user',ref => ref.where("idioma_id","==",id).where("user_id","==",id).limit(1));
+     return b.valueChanges();
+   }
+  public async deleteIdiomaUser(id:string){
+    let af= this.dbf.doc<IdiomaUser>(`idioma-user/${id}`);
+    af.delete();
+  }
+
+  public createIdiomaUser(user_id:string,idioma_id:string){
+    let apartado=new IdiomaUser();
+    apartado.id=String(formatDate(Date.now(),'yyyy-MM-dd mm:ss',this.locale));
+    apartado.idioma_id=idioma_id;
     apartado.user_id=user_id;
     this.SetIdiomaData(apartado);
     
@@ -85,5 +138,12 @@ export class IdiomaService {
 export class Idioma{
   id:string;
   nombre:string;
+  user_id:string;
+  lenguaje:string;
+  private:boolean;
+}
+export class IdiomaUser{
+  id:string;
+  idioma_id:string;
   user_id:string;
 }

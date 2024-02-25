@@ -22,6 +22,7 @@ export class EjercicioComponent {
   showModal=false;
   col1New;
   col2New;
+  
   constructor(
     private ARoute:ActivatedRoute,
     private router:Router,

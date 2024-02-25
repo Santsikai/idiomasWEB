@@ -12,7 +12,7 @@
   
       <div class="ag-courses_item" *ngFor="let idioma of listIdiomas">
         <div class="ag-courses-item_link">
-            <a [routerLink]="['/idiomas/lenguaje',idioma.id]">
+            <a (click)="moveToLeng(idioma)">
                 <div class="ag-courses-item_bg"></div>
                 <div class="ag-courses-item_title">
                     {{idioma.nombre}}
@@ -31,6 +31,12 @@
       <a (click)="showModal=false" class="close">✖</a>
       <h1>Crear nuevo Lenguaje</h1>
         <input type="text" placeholder="Nombre" [(ngModel)]="nombreLeng"/>
+        <select [(ngModel)]="selectedLanguage">
+          <option *ngFor="let language of lang" [value]="language.code">{{ language.name }}</option>
+      </select>
+      <label>
+        <input type="checkbox" [(ngModel)]="privacidad"> lenguaje privado?
+      </label>
         <p></p>
         <a (click)="create()" class="accept">Crear lenguaje</a>
     </div>

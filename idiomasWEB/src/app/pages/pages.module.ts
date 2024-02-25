@@ -14,5 +14,6 @@ import { CommonModule } from "@angular/common";
     PagesComponent,
     
   ],
+  
 })
 export class PagesModule { }
