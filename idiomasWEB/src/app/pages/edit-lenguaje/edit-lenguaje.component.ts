@@ -58,7 +58,10 @@ export class EditLenguajeComponent implements OnInit{
 
   guardar(){
     debugger;
-    if(this.idioma.nombre!=this.idiomaCopy.nombre){
+    if(this.idioma.nombre!=this.idiomaCopy.nombre || this.idioma.private != this.idiomaCopy.private){
+      if(this.idioma.private != this.idiomaCopy.private){
+        this.idiomaSV.editIdiomaUserChangePrivacy(this.idioma.id,this.idioma.private)
+      }
         this.idiomaSV.editIdioma(this.idioma.id,this.idioma.nombre,this.idioma.lenguaje,this.idioma.private)
     }if(this.gv.nombre!=this.gvCopy.nombre || this.gv.nombre_col1!=this.gvCopy.nombre_col1 || this.gv.nombre_col2!=this.gvCopy.nombre_col2){
         this.gvSV.editGrupoVocabulario(this.gv.id,this.gv.nombre,this.gv.nombre_col1,this.gv.nombre_col2)

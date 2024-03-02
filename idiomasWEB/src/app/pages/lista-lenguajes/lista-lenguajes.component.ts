@@ -28,14 +28,17 @@ export class ListaLenguajesComponent {
   moveToLeng(idioma:Idioma){
     localStorage.setItem('langUserID',idioma.user_id)
     localStorage.setItem('langprivacity',String(idioma.private))
-    this.router.navigate(['/pages/idioma/lenguaje',idioma.id]);
+    this.router.navigate(['/idiomas/lenguaje',idioma.id]);
   }
   public async getUserID(){
       this.userId=localStorage.getItem("logUserID");
       this.idiomaSV.getListIdiomabyUserId(this.userId ).subscribe((res)=>{
-        debugger;
         this.listIdiomas= res;
+        this.idiomaSV.getListIdiomabyIdiomaUserId(this.userId).subscribe((r:any)=>{
+          this.listIdiomas.push(...r)
+        })
       });
+      
   }
   create() {
 

@@ -22,7 +22,6 @@ export class EjercicioComponent {
   showModal=false;
   col1New;
   col2New;
-  
   constructor(
     private ARoute:ActivatedRoute,
     private router:Router,
@@ -38,11 +37,17 @@ export class EjercicioComponent {
   async getGV(){
     this.gv= await this.gvSV.getGrupoVocabulario(this.id);
   }
-  getlistPalabra(){
-    this.palabraSV.getListPalabrabyGvId(this.id).subscribe((res:any)=>{
+
+  lastDocumentSnapshot: any;
+  getlistPalabra() {
+    this.palabraSV.getListPalabrabyGvId(this.id, this.lastDocumentSnapshot).subscribe((res: any) => {
       this.getGV();
-      this.listPalabra=res;
-    })
+      this.listPalabra = res;
+      // Update lastDocumentSnapshot for pagination
+      if (res.length > 0) {
+        this.lastDocumentSnapshot = res[res.length - 1];
+      }
+    });
   }
 
 

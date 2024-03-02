@@ -43,9 +43,14 @@ export class PalabraService {
     return a;
   }
 
-  public getListPalabrabyGvId(id:string){
-   let b = this.dbf.collection<Palabra>('/palabra',ref => ref.where("gv_id","==",id));
-    return b.valueChanges();
+  public getListPalabrabyGvId(id: string, startAfter?: any) {
+    let query = (ref: any) => ref.where("gv_id", "==", id).orderBy("createdAt").limit(10);
+  
+    if (startAfter) {
+      query = (ref: any) => ref.where("gv_id", "==", id).orderBy("createdAt").startAfter(startAfter).limit(10);
+    }
+  
+    return this.dbf.collection<Palabra>('/palabra', query).valueChanges();
   }
 
   public editPalabra(id:string, col1:string,col2:string){
