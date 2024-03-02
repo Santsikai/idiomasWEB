@@ -27,15 +27,12 @@ export class LenguajeComponent implements OnInit{
   ) { } 
   ngOnInit() {
     this.id = this.ARoute.snapshot.paramMap.get('lengid').replace(/%20/g, " ");
+    this.getIdioma();
     this.getListaGV();
     
   }
   async getIdioma(){
     this.idioma= await this.idiomaSV.getIdioma(this.id);
-    if(this.idioma.user_id==localStorage.getItem('logUserID')){
-      this.isUserPropietary=true;
-      this.getIdiomaUser()
-    }
   }
    getIdiomaUser(){
     this.idiomaSV.getListIdiomaUserByIdiomaandUser(this.idioma.id,localStorage.getItem('logUserID')).subscribe((res:any)=>{
@@ -46,7 +43,10 @@ export class LenguajeComponent implements OnInit{
   getListaGV(){
     this.gvSV.getListGrupoVocabulariobyIdiomaId(this.id).subscribe((res:any)=>{
       debugger;
-      this.getIdioma();
+      if(this.idioma.user_id==localStorage.getItem('logUserID')){
+        this.isUserPropietary=true;
+        this.getIdiomaUser()
+      }
       this.listgv=res;
     })
   }

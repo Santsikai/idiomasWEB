@@ -1,5 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
+import { UserService } from '../services/users/user-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pages',
@@ -21,4 +23,14 @@ import { Component } from '@angular/core';
 })
 export class PagesComponent {
   expanded: boolean = false;
+  constructor(
+    private userSV:UserService,
+    private router:Router
+    ){}
+  logOut(){
+    //cerrarsesion
+    localStorage.clear();
+    this.userSV.SignOut();
+    this.router.navigate(['/']);
+  }
 }

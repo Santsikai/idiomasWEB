@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { PagesComponent } from './pages.component';
+import { LanguageAccessGuard } from '../guards/language-access.guard';
 
 
 
@@ -10,7 +11,7 @@ const routes: Routes = [{
   component: PagesComponent,
   children: [
     {
-      path: 'busquedaLenguajes',
+      path: 'busqueda-lenguajes',
       loadChildren: () => import('./busqueda-leng/busqueda-leng.module')
         .then(m => m.BusquedaLengModule),
     },
@@ -21,6 +22,7 @@ const routes: Routes = [{
     },
     {
       path: 'lenguaje/:lengid',
+      canActivate: [LanguageAccessGuard],
       loadChildren: () => import('./lenguaje/lenguaje.module')
         .then(m => m.LenguajeModule),
     },

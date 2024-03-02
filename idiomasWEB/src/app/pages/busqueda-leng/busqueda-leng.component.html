@@ -1,1 +1,11 @@
-<p>busqueda-leng works!</p>
+<h1>buscador de idiomas</h1>
+<input type="text" placeholder="nombre lenguaje" [(ngModel)]="idiomaNombre" />
+<select [(ngModel)]="idiomaLenguaje">
+  <option *ngFor="let language of lang" [value]="language.code">{{ language.name }}</option>
+</select>
+<button (click)="search()">buscar</button>
+<ul>
+    <li *ngFor="let i of listResultados">
+    <a (click)="moveToLeng(i)">{{i.nombre}}</a>
+    </li>
+</ul>

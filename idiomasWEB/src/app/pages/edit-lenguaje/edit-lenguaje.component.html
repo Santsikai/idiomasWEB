@@ -6,7 +6,7 @@
   <option *ngFor="let language of lang" [value]="language.code">{{ language.name }}</option>
 </select>
 <label>
-  <input type="checkbox" [(ngModel)]="idioma.private"> lenguaje privado?
+  <input type="checkbox" [(ngModel)]="!idioma.private"> lenguaje privado?
 </label>
 
 <div id="floats">
