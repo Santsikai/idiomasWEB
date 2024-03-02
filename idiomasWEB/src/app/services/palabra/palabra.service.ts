@@ -2,6 +2,7 @@ import { formatDate } from '@angular/common';
 import { Inject, Injectable, LOCALE_ID, NgZone } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
+import { Observable, from, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -43,14 +44,20 @@ export class PalabraService {
     return a;
   }
 
-  public getListPalabrabyGvId(id: string, startAfter?: any) {
-    let query = (ref: any) => ref.where("gv_id", "==", id).orderBy("createdAt").limit(10);
+  getListPalabrabyGvId(id: string, startAfter?: any): Observable<Palabra[]> {
+    let queryFn = (ref: any) => ref.where("gv_id", "==", id).orderBy("createdAt").limit(10);
   
     if (startAfter) {
-      query = (ref: any) => ref.where("gv_id", "==", id).orderBy("createdAt").startAfter(startAfter).limit(10);
+      queryFn = (ref: any) => ref.where("gv_id", "==", id).orderBy("createdAt").startAfter(startAfter).limit(10);
     }
-  
-    return this.dbf.collection<Palabra>('/palabra', query).valueChanges();
+
+    const query = queryFn(this.dbf.collection<Palabra>('/palabra'));
+
+    return from(query.get()).pipe(
+      map((querySnapshot:any) => {
+        return querySnapshot.docs.map(doc => doc.data() as Palabra);
+      })
+    );
   }
 
   public editPalabra(id:string, col1:string,col2:string){

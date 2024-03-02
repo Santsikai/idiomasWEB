@@ -1,7 +1,7 @@
 <h1>{{idioma.nombre}}</h1>
 <button [routerLink]="['/idiomas/editarLenguaje',idioma.id]" *ngIf="isUserPropietary">editar</button>
 <button (click)="compartir()" *ngIf="!isUserPropietary && !hasUserAlreadyCompartido"> añadir lenguaje compartido</button>
-<button (click)="descompartir()" *ngIf="hasUserAlreadyCompartido"> quitar lenguaje compartido</button>
+<button (click)="descompartir()" *ngIf="!isUserPropietary && hasUserAlreadyCompartido"> quitar lenguaje compartido</button>
 <div class="ag-format-container">
     <div class="ag-courses_box">
       <div class="ag-courses_item">

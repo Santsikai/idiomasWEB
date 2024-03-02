@@ -32,8 +32,8 @@ export class ListaLenguajesComponent {
   }
   public async getUserID(){
       this.userId=localStorage.getItem("logUserID");
-      this.idiomaSV.getListIdiomabyUserId(this.userId ).subscribe((res)=>{
-        this.listIdiomas= res;
+      this.idiomaSV.getListIdiomabyUserId(this.userId ).subscribe((res:any)=>{
+        this.listIdiomas.push(...res)
         this.idiomaSV.getListIdiomabyIdiomaUserId(this.userId).subscribe((r:any)=>{
           this.listIdiomas.push(...r)
         })

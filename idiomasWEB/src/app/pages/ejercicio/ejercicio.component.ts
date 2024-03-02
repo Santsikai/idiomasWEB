@@ -42,6 +42,7 @@ export class EjercicioComponent {
   getlistPalabra() {
     this.palabraSV.getListPalabrabyGvId(this.id, this.lastDocumentSnapshot).subscribe((res: any) => {
       this.getGV();
+      debugger;
       this.listPalabra = res;
       // Update lastDocumentSnapshot for pagination
       if (res.length > 0) {
