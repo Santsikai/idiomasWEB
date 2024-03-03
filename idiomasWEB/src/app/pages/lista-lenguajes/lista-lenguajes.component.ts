@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { FileService } from 'src/app/services/files/file.service';
 import { Idioma, IdiomaService, lang } from 'src/app/services/idioma/idioma.service';
 
 @Component({
@@ -10,6 +11,7 @@ import { Idioma, IdiomaService, lang } from 'src/app/services/idioma/idioma.serv
 export class ListaLenguajesComponent {
   userId;
   listIdiomas:Idioma[]=[];
+  listIdiomasC:Idioma[]=[];
   nombreLeng;
   showModal=false;
   selectedLanguage;
@@ -18,7 +20,7 @@ export class ListaLenguajesComponent {
   constructor(
     private idiomaSV:IdiomaService,
     private router:Router,
-
+    private fileSV:FileService
   ) { }
 
   ngOnInit() {
@@ -33,13 +35,23 @@ export class ListaLenguajesComponent {
   public async getUserID(){
       this.userId=localStorage.getItem("logUserID");
       this.idiomaSV.getListIdiomabyUserId(this.userId ).subscribe((res:any)=>{
-        this.listIdiomas.push(...res)
+        this.listIdiomas=res
         this.idiomaSV.getListIdiomabyIdiomaUserId(this.userId).subscribe((r:any)=>{
-          this.listIdiomas.push(...r)
+          this.listIdiomasC=r
         })
       });
       
   }
+  file;
+  loadFile(e:any){
+    this.file=e.target.files[0];
+    
+   }
+   async confirmImport() {
+    await this.fileSV.importDataFromFile(this.file,this.userId)
+    this.showModal=false;
+   }
+
   create() {
 
     this.idiomaSV.createIdioma(this.userId,this.nombreLeng,this.selectedLanguage,this.privacidad);

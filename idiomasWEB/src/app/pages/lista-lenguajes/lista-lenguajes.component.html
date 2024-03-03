@@ -20,16 +20,30 @@
             </a>
         </div>
     </div>
+    <div class="ag-courses_item" *ngFor="let idioma of listIdiomasC">
+      <div class="ag-courses-item_link">
+          <a (click)="moveToLeng(idioma)">
+              <div class="ag-courses-item_bg"></div>
+              <div class="ag-courses-item_title">
+                  {{idioma.nombre}}
+              </div>
+          </a>
+      </div>
+  </div>
   
       
   
     </div>
   </div>
 
+
+  
   <div class="popup" id="popup" *ngIf="showModal">
     <div class="popup__content">
       <a (click)="showModal=false" class="close">✖</a>
       <h1>Crear nuevo Lenguaje</h1>
+      <input type="file" (change)="loadFile($event)">
+      <a class="accept" (click)="confirmImport()">Importar lenguaje</a>
         <input type="text" placeholder="Nombre" [(ngModel)]="nombreLeng"/>
         <select [(ngModel)]="selectedLanguage">
           <option *ngFor="let language of lang" [value]="language.code">{{ language.name }}</option>

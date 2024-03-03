@@ -1,5 +1,7 @@
 <h1>Editar Lenguaje:</h1>
 <button (click)="guardar()">guardar cambios</button>
+<button (click)="deleteidioma()">borrar idioma</button>
+<button (click)="export()">exportar idioma</button>
 <button [routerLink]="['/idiomas/lenguaje',idioma.id]">volver al lenguaje</button>
 <input type="text" placeholder="nombre lenguaje" [(ngModel)]="idioma.nombre" />
 <select [(ngModel)]="idioma.lenguaje">
@@ -15,6 +17,7 @@
     <li *ngFor="let gv of listgv">
       {{gv.nombre}}
     <button (click)="getListPalabras(gv)">editar grupo palabra </button>
+    <button (click)="deleteGV(gv.id)">eliminar grupo palabra </button>
     </li>
 </ul>
 </div>
@@ -28,6 +31,7 @@
         <div class="row" *ngFor="let item of listPalabra">
           <div class="col"><input type="text" placeholder="nombregv" [(ngModel)]="item.col1" /></div>
           <div class="col"><input type="text" placeholder="nombregv" [(ngModel)]="item.col2" /></div>
+          <div class="col"><button (click)="deletepalabra(item.id)">eliminar palabra </button></div>
         </div>
       </ul>
     

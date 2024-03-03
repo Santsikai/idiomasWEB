@@ -114,6 +114,17 @@ export class IdiomaService {
     this.SetIdiomaData(apartado);
     
   }
+  public createIdiomaWithID(id,user_id:string,nombre:string,lenguaje:string,pribate:boolean){
+    let apartado=new Idioma();
+    apartado.id=id;
+    apartado.nombre=nombre;
+    apartado.user_id=user_id;
+    apartado.lenguaje=lenguaje;
+    apartado.private=pribate;
+    this.SetIdiomaData(apartado);
+    
+  }
+
 
   //getidiomasuser
   SetIdiomaUserData(apartado) {
@@ -164,6 +175,12 @@ export class IdiomaService {
   public async deleteIdiomaUser(id:string){
     let af= this.dbf.doc<IdiomaUser>(`idioma-user/${id}`);
     af.delete();
+  }
+
+  public deleteAllIdiomaUserByIdioma(id:string){
+    this.getListIdiomaUserByIdioma(id).subscribe((res:any)=>{
+      this.deleteIdiomaUser(res.id)
+    })
   }
 
   public createIdiomaUser(user_id:string,idioma_id:string){
