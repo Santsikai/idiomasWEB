@@ -35,7 +35,6 @@ export class PerfilComponent implements OnInit{
     this.router.navigate(['/']);
   }
   allowEdit(){
-    debugger;
     this.edit=false;
   }
 

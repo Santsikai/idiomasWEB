@@ -1,1 +1,45 @@
-<p>administracion works!</p>
+<h1>Administracion</h1>
+
+<!-- Bloquear User -->
+<mat-form-field>
+  <mat-label>Bloquear User</mat-label>
+  <mat-select [(ngModel)]="userNoBloqElegido" (selectionChange)="bloquear($event)">
+    <input (keyup)="onKeyBloq($event.target.value)">
+    <mat-option *ngFor="let user of userNoBloqFiltered" [value]="user.id">
+      {{ user.email }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<!-- Desbloquear User -->
+<mat-form-field>
+  <mat-label>Desbloquear User</mat-label>
+  <mat-select [(ngModel)]="userBloqElegido" (selectionChange)="desbloquear($event)">
+    <input (keyup)="onKeyNoBloq($event.target.value)">
+    <mat-option *ngFor="let user of userBloqFiltered" [value]="user.id">
+      {{ user.email }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<!-- Hacer User Admin -->
+<mat-form-field>
+  <mat-label>Hacer administrador a un usuario</mat-label>
+  <mat-select [(ngModel)]="adminElegido" (selectionChange)="changeToAdmin($event)">
+    <input (keyup)="onKeyAdmin($event.target.value)">
+    <mat-option *ngFor="let user of userNoAdminsFiltered" [value]="user.id">
+      {{ user.email }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<!-- Deshacer User Admin -->
+<mat-form-field>
+  <mat-label>Deshacer administrador a un usuario</mat-label>
+  <mat-select [(ngModel)]="userAdminElegido" (selectionChange)="changeToUser($event)">
+    <input (keyup)="onKeyNoAdmin($event.target.value)">
+    <mat-option *ngFor="let user of userAdminsFiltered" [value]="user.id">
+      {{ user.email }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

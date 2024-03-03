@@ -20,7 +20,7 @@ export class EditLenguajeComponent implements OnInit{
   gv:GrupoVocabulario;
   gvCopy:GrupoVocabulario;
   showEditGV=false;
-  lang=lang;
+  selectedlangs=lang;
   
   constructor(
     private ARoute:ActivatedRoute,
@@ -36,7 +36,14 @@ export class EditLenguajeComponent implements OnInit{
     this.getListaGV();
     
   }
+  onKey(value) { 
+    this.selectedlangs = this.search(value);
+    }
 
+    search(value: string) { 
+      let filter = value.toLowerCase();
+      return lang.filter(option => option.code.toLowerCase().startsWith(filter));
+    }
   async getIdioma(){
     this.idioma= await this.idiomaSV.getIdioma(this.id);
     this.idiomaCopy={...this.idioma};

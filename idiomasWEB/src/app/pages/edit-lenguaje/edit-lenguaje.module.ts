@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { EditLenguajeComponent } from './edit-lenguaje.component';
 import { EditLenguajeRoutingModule } from './edit-lenguaje-routing.module';
 import { FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 
@@ -13,7 +15,9 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     EditLenguajeRoutingModule,
-    FormsModule
+    FormsModule,
+    MatSelectModule,
+    MatFormFieldModule
   ]
 })
 export class EditLenguajeModule { }

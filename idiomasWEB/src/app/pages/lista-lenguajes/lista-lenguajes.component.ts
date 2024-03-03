@@ -16,7 +16,7 @@ export class ListaLenguajesComponent {
   showModal=false;
   selectedLanguage;
   privacidad:boolean=false;
-  lang=lang;
+  selectedlangs=lang;
   constructor(
     private idiomaSV:IdiomaService,
     private router:Router,
@@ -27,10 +27,19 @@ export class ListaLenguajesComponent {
     this.getUserID();
     
   }
+
+  onKey(value) { 
+    this.selectedlangs = this.search(value);
+    }
+
+    search(value: string) { 
+      let filter = value.toLowerCase();
+      return lang.filter(option => option.code.toLowerCase().startsWith(filter));
+    }
   moveToLeng(idioma:Idioma){
     localStorage.setItem('langUserID',idioma.user_id)
     localStorage.setItem('langprivacity',String(idioma.private))
-    this.router.navigate(['/idiomas/lenguaje',idioma.id]);
+    this.router.navigate(['/pages/lenguaje',idioma.id]);
   }
   public async getUserID(){
       this.userId=localStorage.getItem("logUserID");

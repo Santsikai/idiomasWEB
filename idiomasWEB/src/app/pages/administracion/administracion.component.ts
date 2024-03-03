@@ -12,15 +12,19 @@ export class AdministracionComponent implements OnInit {
   newPass;
   //make admin
   userNoAdmins=[];
+  userNoAdminsFiltered=[];
   adminElegido;
   //takeout admin
   userAdmins=[];
+  userAdminsFiltered=[];
   userAdminElegido;
   //bloqUser
   userNoBloq=[];
+  userNoBloqFiltered=[];
   userNoBloqElegido;
   //desbloqUser
   userBloq=[];
+  userBloqFiltered=[];
   userBloqElegido;
   constructor(
     private userSV:UserService
@@ -32,27 +36,69 @@ export class AdministracionComponent implements OnInit {
     this.getUserNoBLoq();
   }
 
+  onKeyNoBloq(value) { 
+    this.userBloqFiltered = this.searchNoBloq(value);
+    }
+
+    searchNoBloq(value: string) { 
+      let filter = value.toLowerCase();
+      return this.userBloq.filter(option => option.email.toLowerCase().startsWith(filter));
+    }
+
+    onKeyBloq(value) { 
+      this.userNoBloqFiltered = this.searchBloq(value);
+      }
+  
+      searchBloq(value: string) { 
+        let filter = value.toLowerCase();
+        return this.userNoBloq.filter(option => option.email.toLowerCase().startsWith(filter));
+      }
+
+      onKeyAdmin(value) { 
+        this.userNoAdminsFiltered = this.searchAdmin(value);
+        }
+    
+        searchAdmin(value: string) { 
+          let filter = value.toLowerCase();
+          return this.userNoAdmins.filter(option => option.email.toLowerCase().startsWith(filter));
+        }
+
+        onKeyNoAdmin(value) { 
+          this.userAdminsFiltered = this.searchNoAdmin(value);
+          }
+      
+          searchNoAdmin(value: string) { 
+            let filter = value.toLowerCase();
+            return this.userAdmins.filter(option => option.email.toLowerCase().startsWith(filter));
+          }
+
   async getUserBloq(){
     await this.userSV.getListUsersBloq().subscribe((res)=>{
       this.userBloq=res;
+      this.userBloqFiltered=res;
     })
   }
 
   async getUserNoBLoq(){
     await this.userSV.getListUsersNoBloq().subscribe((res)=>{
       this.userNoBloq=res;
+      this.userNoBloqFiltered=res;
     })
   }
 
+
+  
   async getUserAdmin(){
     await this.userSV.getListUsersAdmin().subscribe((res)=>{
       this.userAdmins=res;
+      this.userAdminsFiltered=res;
     })
   }
 
   async getUserNoAdmin(){
     await this.userSV.getListUsersNoAdmin().subscribe((res)=>{
       this.userNoAdmins=res;
+      this.userNoAdminsFiltered=res;
     })
   }
 

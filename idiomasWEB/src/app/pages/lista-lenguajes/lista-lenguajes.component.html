@@ -45,9 +45,20 @@
       <input type="file" (change)="loadFile($event)">
       <a class="accept" (click)="confirmImport()">Importar lenguaje</a>
         <input type="text" placeholder="Nombre" [(ngModel)]="nombreLeng"/>
-        <select [(ngModel)]="selectedLanguage">
+        <mat-form-field>
+          <mat-label>Selecciona un idioma</mat-label>
+          <mat-select [(value)]="selectedLanguage">
+            <input (keyup)="onKey($event.target.value)">
+            <mat-option *ngFor="let language of selectedlangs" [value]="language.code">
+              {{ language.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        
+
+        <!-- <select [(ngModel)]="selectedLanguage">
           <option *ngFor="let language of lang" [value]="language.code">{{ language.name }}</option>
-      </select>
+      </select> -->
       <label>
         <input type="checkbox" [(ngModel)]="privacidad"> lenguaje privado?
       </label>

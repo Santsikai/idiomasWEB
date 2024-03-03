@@ -13,6 +13,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     
+    MatSelectModule,
+    MatFormFieldModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
