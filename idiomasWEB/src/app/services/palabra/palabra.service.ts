@@ -2,7 +2,7 @@ import { formatDate } from '@angular/common';
 import { Inject, Injectable, LOCALE_ID, NgZone } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
-import { Observable, from, map } from 'rxjs';
+import { Observable, first, from, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -32,30 +32,38 @@ export class PalabraService {
     });
   }
 
-  public async getPalabra(id:string){
-    let a=new Palabra();
-     let af= this.dbf.doc<Palabra>(`palabra/${id}`);
-     af.snapshotChanges().subscribe(arg =>{ 
-      a.id=arg.payload.data().id;
-      a.gv_id=arg.payload.data().gv_id;
-      a.col1=arg.payload.data().col1;
-      a.col2=arg.payload.data().col2;
+  public async getPalabra(id: string): Promise<Palabra> {
+    return new Promise<Palabra>((resolve, reject) => {
+      this.dbf.doc<Palabra>(`palabra/${id}`).snapshotChanges().pipe(
+        first() // Emite solo el primer valor y completa la suscripción
+      ).subscribe(
+        arg => {
+          const data = arg.payload.data() as Palabra;
+          resolve({
+            id: data.id,
+            gv_id: data.gv_id,
+            col1: data.col1,
+            col2: data.col2
+          });
+        },
+        error => {
+          reject(error); // Rechaza la promesa en caso de error
+        }
+      );
     });
-    return a;
   }
 
-  getListPalabrabyGvId(id: string, startAfter?: any): Observable<Palabra[]> {
-    let queryFn = (ref: any) => ref.where("gv_id", "==", id).orderBy("createdAt").limit(10);
-  
-    if (startAfter) {
-      queryFn = (ref: any) => ref.where("gv_id", "==", id).orderBy("createdAt").startAfter(startAfter).limit(10);
-    }
-
-    const query = queryFn(this.dbf.collection<Palabra>('/palabra'));
-
-    return from(query.get()).pipe(
-      map((querySnapshot:any) => {
-        return querySnapshot.docs.map(doc => doc.data() as Palabra);
+  public getListPalabrabyGvId(id:string){
+    let b = this.dbf.collection<Palabra>('/palabra',ref => ref.where("gv_id","==",id));
+     return b.valueChanges();
+   }
+   getListPalabraIDbyGvId(id: string): Observable<string[]> {
+    return this.dbf.collection<Palabra>('/palabra', ref => ref.where("gv_id", "==", id)).snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(action => {
+          const data = action.payload.doc.data() as Palabra;
+          return data.id;
+        });
       })
     );
   }

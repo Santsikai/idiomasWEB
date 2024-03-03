@@ -21,8 +21,8 @@
       <div>
         <ul id="tabla" class="dark">
           <div class="row header">
-            <div class="col">{{ gv.nombre_col1 }}</div>
-            <div class="col">{{ gv.nombre_col2 }}</div>
+            <div class="col" (click)="sort('col1')">{{ gv.nombre_col1 }}</div>
+            <div class="col" (click)="sort('col2')">{{ gv.nombre_col2 }}</div>
           </div>
           <div class="row" *ngFor="let item of listPalabra">
             <div class="col">{{ item.col1 }}</div>
@@ -72,10 +72,7 @@
                       </div>
                     </div>
                   </div>
-                <input
-            [(ngModel)]="wordguessed"
-            *ngIf="!wordFailed"
-          >
+                <input [(ngModel)]="wordguessed" *ngIf="!wordFailed">
           <h3 *ngIf="wordFailed" [innerHTML]="wordtoguess"></h3>
             </div>
 
