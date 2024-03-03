@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { PagesComponent } from './pages.component';
-import { LanguageAccessGuard } from '../guards/language-access.guard';
+import { LanguageAccessGuard } from '../guards/langAccess/language-access.guard';
+import { PropietarioAccessGuard } from '../guards/propietarioAccess/propietario-access.guard';
+import { AdministradorAccessGuard } from '../guards/AdministradorAccess/administrador-access.guard';
 
 
 
@@ -28,6 +30,7 @@ const routes: Routes = [{
     },
     {
       path: 'ejercicio/:gvid',
+      canActivate: [LanguageAccessGuard],
       loadChildren: () => import('./ejercicio/ejercicio.module')
         .then(m => m.EjercicioModule),
     },
@@ -37,7 +40,14 @@ const routes: Routes = [{
         .then(m => m.PerfilModule),
     },
     {
+      path: 'admin',
+      canActivate: [AdministradorAccessGuard],
+      loadChildren: () => import('./administracion/administracion.module')
+        .then(m => m.AdministracionModule),
+    },
+    {
       path: 'editarLenguaje/:lengid',
+      canActivate: [PropietarioAccessGuard],
       loadChildren: () => import('./edit-lenguaje/edit-lenguaje.module')
         .then(m => m.EditLenguajeModule),
     },
