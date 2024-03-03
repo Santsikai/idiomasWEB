@@ -61,7 +61,6 @@ export class UserService {
       a.id=arg.payload.data().id;
       a.email=arg.payload.data().email;
       a.password=arg.payload.data().password;
-      a.username=arg.payload.data().username;
       a.bloqued=arg.payload.data().bloqued;
       a.role_id=arg.payload.data().role_id;
     });
@@ -104,9 +103,8 @@ export class UserService {
     },{merge:true});
   }
 
-  public editUser(id:string, username:string,pass:string,email:string){
+  public editUser(id:string,pass:string,email:string){
     this.dbf.doc(`users/${id}`).set({
-      username: username,
       password: pass,
       email:email
     },{merge:true});
@@ -119,10 +117,9 @@ export class UserService {
     af.delete();
   }
 
-  public async createUser(username:string,pass:string,email:string,rol){
+  public async createUser(pass:string,email:string,rol){
     const userAuth = await this.ngFireAuth.createUserWithEmailAndPassword(email, pass);
     var user = {
-      username: username,
       password: pass,
       email: userAuth.user.email,
       id: userAuth.user.uid,
@@ -131,7 +128,6 @@ export class UserService {
   let u=new User();
   u.email=email;
   u.password=pass;
-  u.username=username;
   u.id=userAuth.user.uid;
   u.bloqued=0;
   u.role_id=rol;
@@ -171,7 +167,6 @@ SetUserData(user) {
   const userData: User = {
     id: user.id,
     email: user.email,
-    username: user.username,
     password: user.password,
     bloqued:0,
     role_id:user.role_id
@@ -192,7 +187,6 @@ SignOut() {
 }
 export class User{
   id:string;
-  username:string;
   password:string;
   email:string;
 bloqued:number;

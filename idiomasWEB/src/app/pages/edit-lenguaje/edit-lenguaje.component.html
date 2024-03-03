@@ -2,7 +2,7 @@
 <button (click)="guardar()">guardar cambios</button>
 <button (click)="deleteidioma()">borrar idioma</button>
 <button (click)="export()">exportar idioma</button>
-<button [routerLink]="['/idiomas/lenguaje',idioma.id]">volver al lenguaje</button>
+<button [routerLink]="['/pages/lenguaje',idioma.id]">volver al lenguaje</button>
 <input type="text" placeholder="nombre lenguaje" [(ngModel)]="idioma.nombre" />
 <select [(ngModel)]="idioma.lenguaje">
   <option *ngFor="let language of lang" [value]="language.code">{{ language.name }}</option>

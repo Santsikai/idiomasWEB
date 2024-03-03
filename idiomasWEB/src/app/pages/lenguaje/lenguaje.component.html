@@ -1,5 +1,5 @@
 <h1>{{idioma.nombre}}</h1>
-<button [routerLink]="['/idiomas/editarLenguaje',idioma.id]" *ngIf="isUserPropietary">configuracion</button>
+<button [routerLink]="['/pages/editar-lenguaje',idioma.id]" *ngIf="isUserPropietary">configuracion</button>
 <button (click)="compartir()" *ngIf="!isUserPropietary && !hasUserAlreadyCompartido"> añadir lenguaje compartido</button>
 <button (click)="descompartir()" *ngIf="!isUserPropietary && hasUserAlreadyCompartido"> quitar lenguaje compartido</button>
 <div class="ag-format-container">
@@ -16,7 +16,7 @@
   
       <div class="ag-courses_item" *ngFor="let gv of listgv">
         <div class="ag-courses-item_link">
-            <a [routerLink]="['/idiomas/ejercicio',gv.id]">
+            <a [routerLink]="['/pages/ejercicio',gv.id]">
                 <div class="ag-courses-item_bg"></div>
                 <div class="ag-courses-item_title">
                     {{gv.nombre}}

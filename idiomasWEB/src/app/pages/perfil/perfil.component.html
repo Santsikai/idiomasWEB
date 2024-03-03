@@ -1,1 +1,14 @@
-<p>perfil works!</p>
+<h1>PERFIL</h1>
+<input type="text" [(ngModel)]="user.email" placeholder="email" [disabled]="edit"/>
+<input type="text" [(ngModel)]="user.password" placeholder="password" [disabled]="edit"/>
+<div *ngIf="edit">
+    <button id="btn-edit" (click)="allowEdit()">editar datos</button>
+</div>
+<div *ngIf="!edit">
+    <button (click)="editUser()">guardar cambios</button>
+</div>
+
+<div *ngIf="user.role_id=='1'">
+    <button [routerLink]="['/pages/admin']" routerLinkActive="router-link-active">admin</button>
+</div>
+    <button (click)="bloqUser()">bloquear cuenta</button>

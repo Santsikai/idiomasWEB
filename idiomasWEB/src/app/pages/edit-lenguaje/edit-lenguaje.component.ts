@@ -61,7 +61,7 @@ export class EditLenguajeComponent implements OnInit{
 deleteidioma(){
   this.idiomaSV.deleteIdioma(this.idioma.id)
   this.idiomaSV.deleteAllIdiomaUserByIdioma(this.idioma.id)
-  this.router.navigate(['/idiomas']);
+  this.router.navigate(['/pages']);
 }
 deleteGV(id){
   this.gvSV.deleteGrupoVocabulario(id)

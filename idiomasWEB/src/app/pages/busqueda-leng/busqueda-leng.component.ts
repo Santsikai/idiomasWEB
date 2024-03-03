@@ -19,7 +19,7 @@ export class BusquedaLengComponent {
   moveToLeng(idioma:Idioma){
     localStorage.setItem('langUserID',idioma.user_id)
     localStorage.setItem('langprivacity',String(idioma.private))
-    this.router.navigate(['/idiomas/lenguaje',idioma.id]);
+    this.router.navigate(['/pages/lenguaje',idioma.id]);
   }
   search(){
     if(this.idiomaLenguaje ==""){

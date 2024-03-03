@@ -15,7 +15,6 @@ export class AuthComponent implements OnInit{
   email:string;
   password:string;
   passwordc:string;
-  username:string;
   iduserbloq;
   iduserrol;
   showAlertbbu=false;
@@ -30,7 +29,7 @@ export class AuthComponent implements OnInit{
     if(a){
       localStorage.setItem("logUserID",a.uid);
       localStorage.setItem("isLoginRegister","true");
-          this.router.navigate(['/idiomas']);
+          this.router.navigate(['/pages']);
     }
   }
   async login(){
@@ -41,7 +40,7 @@ export class AuthComponent implements OnInit{
           localStorage.setItem("logUserID",res.user.uid);
           localStorage.setItem("isLoginRegister","true");
           localStorage.setItem("rol_Id",r[0].role_id);
-          this.router.navigate(['/idiomas']);
+          this.router.navigate(['/pages']);
     }
     else if( r[0].bloqued==1){
       //show alert de la cuenta ha sido bloqueada por el usuario
@@ -66,18 +65,18 @@ export class AuthComponent implements OnInit{
           localStorage.setItem("logUserID",this.iduserbloq);
           localStorage.setItem("isLoginRegister","true");
           localStorage.setItem("rol_Id",this.iduserrol);
-          this.router.navigate(['/idiomas']);
+          this.router.navigate(['/pages']);
   }
 
 
   register(){
     if(this.password==this.passwordc){
-      this.userSV.createUser(this.username,this.password,this.email,"2")      
+      this.userSV.createUser(this.password,this.email,"2")      
       .then((res) => {
         localStorage.setItem("logUserID",res.id);
         localStorage.setItem("isLoginRegister","true");
         localStorage.setItem("rol_Id","2");
-        this.router.navigate(['/idiomas']);
+        this.router.navigate(['/pages']);
       }).catch((error) => {
         window.alert(error.message)
       })

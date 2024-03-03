@@ -4,7 +4,7 @@ import { AngularFireAuthGuard } from '@angular/fire/compat/auth-guard';
 
 const routes: Routes = [
   {
-    path: 'idiomas',
+    path: 'pages',
     loadChildren: () => import('./pages/pages.module')
       .then(m => m.PagesModule), canActivate: [AngularFireAuthGuard],
   },

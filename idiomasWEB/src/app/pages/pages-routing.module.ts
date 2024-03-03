@@ -46,7 +46,7 @@ const routes: Routes = [{
         .then(m => m.AdministracionModule),
     },
     {
-      path: 'editarLenguaje/:lengid',
+      path: 'editar-lenguaje/:lengid',
       canActivate: [PropietarioAccessGuard],
       loadChildren: () => import('./edit-lenguaje/edit-lenguaje.module')
         .then(m => m.EditLenguajeModule),
