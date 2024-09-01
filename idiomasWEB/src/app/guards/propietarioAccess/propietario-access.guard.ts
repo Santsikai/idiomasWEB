@@ -10,7 +10,6 @@ export class PropietarioAccessGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       const langUserID = localStorage.getItem("langUserID") 
-      debugger;
       const logUserID = localStorage.getItem("logUserID") 
   
       // Verifica si el usuario es el propietario del idioma o si el idioma es privado

@@ -1,9 +1,18 @@
-<h1>Editar Lenguaje:</h1>
-<button (click)="guardar()">guardar cambios</button>
-<button (click)="deleteidioma()">borrar idioma</button>
-<button (click)="export()">exportar idioma</button>
-<button [routerLink]="['/pages/lenguaje',idioma.id]">volver al lenguaje</button>
-<input type="text" placeholder="nombre lenguaje" [(ngModel)]="idioma.nombre" />
+<div class="title">
+<a [routerLink]="['/pages/lenguaje',idioma.id]" class="accept" id="v">←</a><br/>
+<div class="text-box">
+  <h1>Editar Lenguaje</h1>
+  <h1>Editar Lenguaje</h1>
+</div>
+</div>
+<div class="other">
+<a (click)="deleteidioma()" class="accept">Borrar idioma</a><br/>
+<a (click)="export()" class="accept">Exportar idioma</a><br/>
+
+<div class="form__group field">
+  <input type="text" class="mb-2" class="form__field" placeholder="Nombre idioma" name="nidioma" id='nidioma' required [(ngModel)]="idioma.nombre"/>
+  <label for="nidioma" class="form__label">Nombre idioma</label>
+</div>
 <mat-form-field>
   <mat-label>Selecciona un idioma</mat-label>
   <mat-select [(value)]="idioma.lenguaje">
@@ -14,24 +23,26 @@
   </mat-select>
 </mat-form-field>
 
-<select [(ngModel)]="idioma.lenguaje">
-  <option *ngFor="let language of selectedlangs" [value]="language.code">{{ language.name }}</option>
-</select>
 <label>
-  <input type="checkbox" [(ngModel)]="!idioma.private"> lenguaje privado?
+  <label class="form-control">
+    <input type="checkbox" name="checkbox" [(ngModel)]="!idioma.private"/>
+    ¿lenguaje privado?
+  </label>
 </label>
 
 <div id="floats">
 <div id="listgv">
-<ul>
+  <h2>Grupos Palabras</h2>
+<ol class="alternating-colors">
     <li *ngFor="let gv of listgv">
-      {{gv.nombre}}
-    <button (click)="getListPalabras(gv)">editar grupo palabra </button>
-    <button (click)="deleteGV(gv.id)">eliminar grupo palabra </button>
+      <strong>{{gv.nombre}}</strong><br/>
+      <a (click)="getListPalabras(gv)" class="accept">Editar grupo palabra</a><br/>
+      <a (click)="deleteGV(gv.id)" class="accept">Eliminar grupo palabra</a>
     </li>
-</ul>
+</ol>
 </div>
-<div id="editarGV" *ngIf="showEditGV">
+<div class="popup" id="popup" *ngIf="showEditGV">
+  <div class="popup__content">
     <input type="text" placeholder="nombregv" [(ngModel)]="gv.nombre" />
     <ul id="tabla" class="dark">
         <div class="row header">
@@ -46,4 +57,6 @@
       </ul>
     
 </div>
+</div>
+<a (click)="guardar()" class="accept" id="g">Guardar Cambios</a><br/>
 </div>

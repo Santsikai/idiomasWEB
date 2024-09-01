@@ -38,6 +38,7 @@
 
 
   
+  
   <div class="popup" id="popup" *ngIf="showModal">
     <div class="popup__content">
       <a (click)="showModal=false" class="close">✖</a>
@@ -45,15 +46,24 @@
       <input type="file" (change)="loadFile($event)">
       <a class="accept" (click)="confirmImport()">Importar lenguaje</a>
         <input type="text" placeholder="Nombre" [(ngModel)]="nombreLeng"/>
-        <mat-form-field>
-          <mat-label>Selecciona un idioma</mat-label>
-          <mat-select [(value)]="selectedLanguage">
-            <input (keyup)="onKey($event.target.value)">
-            <mat-option *ngFor="let language of selectedlangs" [value]="language.code">
+        <div class="custom-select">
+          <input 
+            type="text" 
+            placeholder="Buscar..." 
+            [(ngModel)]="searchTerm" 
+            (keyup)="filterLanguages()" 
+            (focus)="isDropdownOpen = true"
+            class="search-box"
+          />
+          <ul class="options-list" *ngIf="isDropdownOpen">
+            <li 
+              *ngFor="let language of filteredLanguages" 
+              (click)="selectLanguage(language)">
               {{ language.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+            </li>
+          </ul>
+        </div>
+        
         
 
         <!-- <select [(ngModel)]="selectedLanguage">

@@ -171,7 +171,6 @@ export class EjercicioComponent {
   }
   AnswToCheck=true;
   async checkAnswer(){
-    debugger;
     let wordtoguessNormalized=this.removeTextBetweenParentheses(this.removeTildes(this.wordtoguess).toLocaleLowerCase());
     let wordguessedNormalized=this.removeTildes(this.wordguessed).toLocaleLowerCase();
     if(wordtoguessNormalized==wordguessedNormalized){
@@ -202,7 +201,6 @@ export class EjercicioComponent {
         this.wordtoguess=word.col2;
         }
         else{
-          debugger;
           if(this.totalwords==this.wordsdone-1)
           this.wordsdone=this.wordsdone+1;
           this.wordShow=word.col2;

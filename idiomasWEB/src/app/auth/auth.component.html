@@ -34,8 +34,15 @@
               <div class="card-front">
                 <div class="pricing-wrap">
                   <h4 class="mb-5">Iniciar Sesión</h4>
-                  <input class="mb-2" type="email" placeholder="email" [(ngModel)]="email" />
-                  <input class="mb-4" type="password" placeholder="password" [(ngModel)]="password" />
+                  <div class="form__group field">
+                    <input type="email" class="mb-2" class="form__field" placeholder="Email" name="email" id='email' required [(ngModel)]="email"/>
+                    <label for="email" class="form__label">Email</label>
+                  </div>
+                  <!-- <input class="mb-2" type="email" placeholder="email"  /><br/> -->
+                  <div class="form__group field">
+                    <input type="password" class="mb-2" class="form__field" placeholder="Password" name="name" id='name' required [(ngModel)]="password"/>
+                    <label for="name" class="form__label">Password</label>
+                  </div>
                   <p class="mb-4"></p>
 
                   <a (click)="login()" class="link mb-4">Entrar</a>
@@ -49,9 +56,18 @@
               <div class="card-back">
                 <div class="pricing-wrap">
                   <h4 class="mb-5">Registarse</h4>
-                  <input class="mb-2 topinput" type="text" placeholder="email" [(ngModel)]="email" />
-                  <input class="mb-2" type="password" placeholder="password" [(ngModel)]="password" />
-                  <input class="mb-4" type="password" placeholder="confirmar password" [(ngModel)]="passwordc" />
+                  <div class="form__group field">
+                    <input type="email" class="mb-2" class="form__field" placeholder="Email" name="email" id='email' required [(ngModel)]="email"/>
+                    <label for="email" class="form__label">Email</label>
+                  </div>
+                  <div class="form__group field">
+                    <input type="password" class="mb-2" class="form__field" placeholder="Password" name="name" id='name' required [(ngModel)]="password"/>
+                    <label for="name" class="form__label">Password</label>
+                  </div>
+                  <div class="form__group field">
+                    <input type="password" class="mb-2" class="form__field" placeholder="Confirm Password" name="name" id='name' required [(ngModel)]="passwordc"/>
+                    <label for="name" class="form__label">Confirm Password</label>
+                  </div>
                   <p class="mb-1"></p>
                   <a (click)="register()" class="link mb-4">Registrarse</a>
                   <div class="img-wrap img-2">

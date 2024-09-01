@@ -97,7 +97,6 @@ export class IdiomaService {
   }
 
   public async deleteIdioma(id:string){
-    debugger;
      await this.gvSV.deleteGrupoVocabulariobyIdiomaId(id);
 
     let af= this.dbf.doc<Idioma>(`idioma/${id}`);

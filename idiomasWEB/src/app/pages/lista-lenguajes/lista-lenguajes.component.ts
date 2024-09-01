@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { FileService } from 'src/app/services/files/file.service';
 import { Idioma, IdiomaService, lang } from 'src/app/services/idioma/idioma.service';
@@ -14,7 +14,6 @@ export class ListaLenguajesComponent {
   listIdiomasC:Idioma[]=[];
   nombreLeng;
   showModal=false;
-  selectedLanguage;
   privacidad:boolean=false;
   selectedlangs=lang;
   constructor(
@@ -68,7 +67,29 @@ export class ListaLenguajesComponent {
     this.showModal=false
 }
 
+searchTerm: string = '';
+  filteredLanguages = lang;
+  isDropdownOpen: boolean = false;
+  selectedLanguage: string | null = null;
 
+  filterLanguages() {
+    this.filteredLanguages = lang.filter(language => 
+      language.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
 
+  selectLanguage(language: { code: string, name: string }) {
+    this.selectedLanguage = language.name;
+    this.searchTerm = language.name;
+    this.filteredLanguages = [];
+  }
 
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    const isInside = target.closest('.custom-select');
+    if (!isInside) {
+      this.isDropdownOpen = false;
+    }
+  }
 }

@@ -1,7 +1,12 @@
-<h1>{{idioma.nombre}}</h1>
-<button [routerLink]="['/pages/editar-lenguaje',idioma.id]" *ngIf="isUserPropietary">configuracion</button>
-<button (click)="compartir()" *ngIf="!isUserPropietary && !hasUserAlreadyCompartido"> añadir lenguaje compartido</button>
-<button (click)="descompartir()" *ngIf="!isUserPropietary && hasUserAlreadyCompartido"> quitar lenguaje compartido</button>
+<div class="title">
+  <a [routerLink]="['/pages/editar-lenguaje',idioma.id]" *ngIf="isUserPropietary" class="accept" id="v">⚙︎</a>
+<div class="text-box">
+  <h1>{{idioma.nombre}}</h1>
+  <h1>{{idioma.nombre}}</h1>
+</div>
+</div>
+<a (click)="compartir()" *ngIf="!isUserPropietary && !hasUserAlreadyCompartido" class="accept">Añadir lenguaje compartido</a>
+<a (click)="descompartir()" *ngIf="!isUserPropietary && hasUserAlreadyCompartido" class="accept">Quitar lenguaje compartido</a>
 <div class="ag-format-container">
     <div class="ag-courses_box">
       <div class="ag-courses_item">
@@ -32,10 +37,19 @@
   <div class="popup" id="popup" *ngIf="showModal">
     <div class="popup__content">
       <a (click)="showModal=false" class="close">✖</a>
-      <h1>Crear nuevo Grupo de vocabulario</h1>
-        <input type="text" placeholder="Nombre" [(ngModel)]="nameNew"/>
-        <input type="text" placeholder="Nombre columna 1" [(ngModel)]="col1New"/>
-        <input type="text" placeholder="Nombre columna 2" [(ngModel)]="col2New"/>
+      <h2>Crear nuevo Grupo de vocabulario</h2>
+      <div class="form__group field">
+        <input type="text" class="mb-2" class="form__field" placeholder="Nombre" name="Nombre" id='Nombre' required [(ngModel)]="nameNew"/>
+        <label for="Nombre" class="form__label">Nombre</label>
+      </div>
+      <div class="form__group field">
+        <input type="text" class="mb-2" class="form__field" placeholder="Nombre columna 1" name="c1" id='c1' required [(ngModel)]="col1New"/>
+        <label for="c1" class="form__label">Nombre columna 1</label>
+      </div>
+      <div class="form__group field">
+        <input type="text" class="mb-2" class="form__field" placeholder="Nombre columna 2" name="c2" id='c2' required [(ngModel)]="col2New"/>
+        <label for="c2" class="form__label">Nombre columna 2</label>
+      </div>
         <p></p>
         <a (click)="create()" class="accept">Crear grupo vocabulario</a>
     </div>

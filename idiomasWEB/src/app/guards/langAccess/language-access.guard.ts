@@ -13,7 +13,6 @@ export class LanguageAccessGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const langUserID = localStorage.getItem("langUserID") 
     const langprivacity = localStorage.getItem("langprivacity") 
-    debugger;
     const logUserID = localStorage.getItem("logUserID") 
 
     // Verifica si el usuario es el propietario del idioma o si el idioma es privado

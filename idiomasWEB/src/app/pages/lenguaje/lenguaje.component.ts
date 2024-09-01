@@ -42,7 +42,6 @@ export class LenguajeComponent implements OnInit{
   }
   getListaGV(){
     this.gvSV.getListGrupoVocabulariobyIdiomaId(this.id).subscribe((res:any)=>{
-      debugger;
       if(this.idioma.user_id==localStorage.getItem('logUserID')){
         this.isUserPropietary=true;
         this.getIdiomaUser()

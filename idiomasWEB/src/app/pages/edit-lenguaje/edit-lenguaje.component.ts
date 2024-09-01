@@ -50,16 +50,17 @@ export class EditLenguajeComponent implements OnInit{
   }
   getListaGV(){
     this.gvSV.getListGrupoVocabulariobyIdiomaId(this.id).subscribe((res:any)=>{
-      debugger;
       this.getIdioma();
       this.listgv=res;
     })
   }
 
   getListPalabras(gv){
+    debugger;
     this.gv=gv;
     this.gvCopy={ ...gv};
     this.palabraSV.getListPalabrabyGvId(gv.id).subscribe((res:any)=>{
+      debugger;
       this.listPalabra = JSON.parse(JSON.stringify(res));
       this.listPalabraCopy = JSON.parse(JSON.stringify(this.listPalabra));
       this.showEditGV=true;
@@ -80,7 +81,6 @@ export(){
   this.fileSV.getData(this.idioma.id);
 }
   guardar(){
-    debugger;
     if(this.idioma.nombre!=this.idiomaCopy.nombre || this.idioma.private != this.idiomaCopy.private){
       if(this.idioma.private != this.idiomaCopy.private){
         this.idiomaSV.editIdiomaUserChangePrivacy(this.idioma.id,this.idioma.private)

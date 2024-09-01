@@ -1,22 +1,30 @@
-<header> <button (click)="expanded = !expanded">
-    <span class="material-icons" *ngIf="!expanded">
-    menu
-    </span>
-    <span class="material-icons" *ngIf="expanded">
-        close
-    </span>
-</button> Header</header>
+<header class="header" role="banner">
+  <nav id="nav" class="nav" role="navigation">
+    <a class="nav__toggle" role="button" aria-expanded="false" aria-controls="menu" (click)="toggleMenu()">
+      <svg class="menuicon" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50">
+        <title>Toggle Menu</title>
+        <g>
+          <line class="menuicon__bar" x1="13" y1="16.5" x2="37" y2="16.5"/>
+          <line class="menuicon__bar" x1="13" y1="24.5" x2="37" y2="24.5"/>
+          <line class="menuicon__bar" x1="13" y1="32.5" x2="37" y2="32.5"/>
+          <circle class="menuicon__circle" r="23" cx="25" cy="25" />
+        </g>
+      </svg>
+    </a>
+
+    <ul class="nav__menu" id="menu" aria-label="main navigation" [hidden]="!expanded">
+      <li class="nav__item" (click)="toggleMenu()"><a [routerLink]="['/pages/lista-lenguajes']" class="nav__link">Listas Lenguajes</a></li>
+      <li class="nav__item" (click)="toggleMenu()"><a [routerLink]="['/pages/busqueda-lenguajes']" class="nav__link">Busqueda Lenguajes</a></li>
+      <li class="nav__item" (click)="toggleMenu()"><a [routerLink]="['/pages/perfil']" class="nav__link">Perfil</a></li>
+      <li class="nav__item" (click)="toggleMenu()"><a [routerLink]="['/pages/admin']" *ngIf="userRol=='1'" class="nav__link">Admin</a></li>
+      <li class="nav__item" (click)="toggleMenu()"><a (click)="logOut()" class="nav__link">Cerrar Sesión</a></li>
+    </ul>
+
+    <div class="splash"></div>
+  </nav>
+</header>
 
 <div class="main-layout">
-  <aside class="sidebar" *ngIf="expanded" @slidein>
-    <ul>
-      <li><a [routerLink]="['/pages/lista-lenguajes']">Listas Lenguajes</a></li>
-      <li><a [routerLink]="['/pages/busqueda-lenguajes']">Busqueda Lenguajes</a></li>
-      <li><a [routerLink]="['/pages/perfil']">Perfil</a></li>
-      <li><a [routerLink]="['/pages/admin']" *ngIf="userRol=='1'">Admin</a></li>
-      <li><a (click)="logOut()">Cerrar Sesión</a></li>
-    </ul>
-  </aside>
   <section>
     <router-outlet></router-outlet>
   </section>
