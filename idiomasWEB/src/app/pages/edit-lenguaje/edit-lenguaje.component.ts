@@ -60,7 +60,6 @@ export class EditLenguajeComponent implements OnInit{
     this.gv=gv;
     this.gvCopy={ ...gv};
     this.palabraSV.getListPalabrabyGvId(gv.id).subscribe((res:any)=>{
-      debugger;
       this.listPalabra = JSON.parse(JSON.stringify(res));
       this.listPalabraCopy = JSON.parse(JSON.stringify(this.listPalabra));
       this.showEditGV=true;

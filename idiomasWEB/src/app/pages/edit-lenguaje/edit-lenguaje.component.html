@@ -43,16 +43,43 @@
 </div>
 <div class="popup" id="popup" *ngIf="showEditGV">
   <div class="popup__content">
-    <input type="text" placeholder="nombregv" [(ngModel)]="gv.nombre" />
+    <h2>Editar grupo palabras</h2>
+    <div class="form__group field">
+      <input type="text" class="mb-2" class="form__field" placeholder="Nombre" name="Nombre" id='Nombre' required [(ngModel)]="gv.nombre"/>
+      <label for="Nombre" class="form__label">Nombre Grupo palabras</label>
+    </div>
+<h4>Palabras</h4>
     <ul id="tabla" class="dark">
         <div class="row header">
-          <div class="col"><input type="text" placeholder="nombregv" [(ngModel)]="gv.nombre_col1" /></div>
-          <div class="col"><div class="col"><input type="text" placeholder="nombregv" [(ngModel)]="gv.nombre_col2" /></div></div>
+          <div class="col">
+            <div class="form__group field">
+              <input type="text" class="mb-2" class="form__field" placeholder="Nombre Columna 1" name="c1" id='c1' required [(ngModel)]="gv.nombre_col1"/>
+              <label for="c1" class="form__label">Nombre Colmuna1</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form__group field">
+              <input type="text" class="mb-2" class="form__field" placeholder="Nombre Columna 2" name="c2" id='c2' required [(ngModel)]="gv.nombre_col2"/>
+              <label for="c2" class="form__label">Nombre Colmuna</label>
+            </div>
+          </div>
         </div>
         <div class="row" *ngFor="let item of listPalabra">
-          <div class="col"><input type="text" placeholder="nombregv" [(ngModel)]="item.col1" /></div>
-          <div class="col"><input type="text" placeholder="nombregv" [(ngModel)]="item.col2" /></div>
-          <div class="col"><button (click)="deletepalabra(item.id)">eliminar palabra </button></div>
+          <div class="col">
+            <div class="form__group field">
+              <input type="text" class="mb-2" class="form__field" placeholder="Palabra Colmuna 1" name="i1" id='i1' required [(ngModel)]="item.col1"/>
+              <label for="i1" class="form__label">Palabra Colmuna 1</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form__group field">
+              <input type="text" class="mb-2" class="form__field" placeholder="Palabra Colmuna 2" name="i2" id='i2' required [(ngModel)]="item.col2"/>
+              <label for="i2" class="form__label">Palabra Colmuna 2</label>
+            </div>
+          </div>
+          <div class="col">
+            <a (click)="deletepalabra(item.id)" class="accept">X</a><br/>
+          </div>
         </div>
       </ul>
     
